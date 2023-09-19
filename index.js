@@ -10,6 +10,10 @@ dotenv.config();
 app.use(json());
 app.use(cors());
 
+app.use(express.json());
+
+app.use(express.urlencoded({ extended: true }));
+
 const uri = `mongodb+srv://${process.env.USER_DB}:${process.env.PASSWORD_DB}@cluster0.ua8ibx3.mongodb.net/?retryWrites=true&w=majority`;
 
 const client = new MongoClient(uri, {
@@ -79,7 +83,7 @@ async function run() {
     console.log(err);
   }
 }
-
+//   hello world
 run().catch(console.dir);
 
 app.get("/", (req, res) => {
