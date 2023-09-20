@@ -1,18 +1,16 @@
-const cors = require("cors");
-const express = require("express");
-const { json } = require("express");
-const dotenv = require("dotenv");
-const { MongoClient, ObjectId, ServerApiVersion } = require("mongodb");
+import cors from "cors";
+import express, {  urlencoded } from "express";
+import { config } from "dotenv";
+import { MongoClient, ObjectId, ServerApiVersion } from "mongodb";
 const app = express();
 const port = 5000;
-dotenv.config();
+config();
 
-app.use(json());
 app.use(cors());
-
 app.use(express.json());
-
 app.use(express.urlencoded({ extended: true }));
+
+app.use(urlencoded({ extended: true }));
 
 const uri = `mongodb+srv://${process.env.USER_DB}:${process.env.PASSWORD_DB}@cluster0.ua8ibx3.mongodb.net/?retryWrites=true&w=majority`;
 
@@ -94,4 +92,4 @@ app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
 
-module.exports = app;
+export default app;
